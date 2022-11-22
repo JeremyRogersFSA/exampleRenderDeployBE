@@ -1,5 +1,5 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
-// const {} = require("../db/index");
+const { createUser, createActivity } = require("../db/index");
 const client = require("./client");
 
 async function dropTables() {
@@ -33,7 +33,7 @@ async function createInitialUsers() {
     // console.log("Finished creating users!");
   } catch (error) {
     // console.error("Error creating users!");
-    throw error;
+    console.error(error.detail);
   }
 }
 async function createInitialActivities() {
@@ -69,7 +69,7 @@ async function createInitialActivities() {
     // console.log("Finished creating activities!");
   } catch (error) {
     // console.error("Error creating activities!");
-    throw error;
+    console.error(error.detail);
   }
 }
 
@@ -191,10 +191,9 @@ async function rebuildDB() {
     client.end();
   } catch (error) {
     // console.log("Error during rebuildDB");
-    throw error;
+    console.error(error.detail);
   }
 }
-
 module.exports = {
   rebuildDB,
   dropTables,
